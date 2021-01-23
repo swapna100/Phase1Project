@@ -20,6 +20,7 @@ public class FileManagementProject {
 			} 
 			catch (Exception e) {
 				System.out.println("Invalid input "+e.getMessage());
+				System.out.println("Closing App");
 				sc.close();
 			}
 	}
