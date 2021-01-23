@@ -49,7 +49,7 @@ public class MainMenu {
 				choice2 = sc.nextInt();
 			}
 			catch (InputMismatchException e3) {
-				System.out.println("Invallid input choice "+e3);
+				System.out.println("Invallid input choice "+e3.getMessage());
 				
 			}
 				// inner switch cases to run the sub menu
@@ -61,10 +61,10 @@ public class MainMenu {
 						createNewFile();
 					} 
 					catch (IOException e) {
-						System.out.println("\tIncorrect Filename"+e);
+						System.out.println("\tIncorrect Filename "+e.getMessage());
 					}
 					catch(NullPointerException e) {
-						System.out.println("\tFileName should not be null"+e);
+						System.out.println("\tFileName should not be null "+e.getMessage());
 					}
 					    break;
 		
@@ -73,16 +73,16 @@ public class MainMenu {
 					try {
 						delete();
 					} catch (NullPointerException  e1) {
-						System.out.println("\tInvallid input"+e1);
+						System.out.println("\tInvalid input "+e1.getMessage());
 					} catch (NoSuchFileException e) {
 						
-						System.out.println("\tNo file found"+e);
+						System.out.println("\tNo file found  "+e.getMessage());
 					} catch (DirectoryNotEmptyException e) {
 						
-						System.out.println("\tEmpty Directory"+e);
+						System.out.println("\tEmpty Directory "+e.getMessage());
 					} catch (IOException e) {
 						
-						System.out.println("\tInvallid"+e.getMessage());
+						System.out.println("\tInvalid input "+e.getMessage());
 					}
 							break;			
 					case 3: 
@@ -91,7 +91,7 @@ public class MainMenu {
 								searchFile();
 							} 
 							catch (FileNotFoundException | NullPointerException e) {
-								System.out.println("\tInvallid input"+e);
+								System.out.println("\tInvalid input "+e.getMessage());
 							}
 							break;
 			
@@ -101,7 +101,7 @@ public class MainMenu {
 						menuMain();
 					} catch (InputMismatchException e2) {
 						
-						System.out.println("\tWrong input entered"+e2);
+						System.out.println("\tWrong input entered "+e2.getMessage());
 					}
 					break;
 					// invoke the sub menu for user interactions	
@@ -136,7 +136,7 @@ public class MainMenu {
 				System.out.println(e.getMessage());
 			}
 		}
-             // exit from switch to continue or  not    
+             while(choice1 != 4)  {
 			 System.out.println("\tDo you want to continue? please Press digit 4");
 			  choice2 = sc.nextInt();
 			  if(choice2==4) {
@@ -146,12 +146,14 @@ public class MainMenu {
 				 System.out.println("You choose to Exit!");
 			     System.exit(0);
 			 }
+             }  
 			 }
         
 	// method to Display file names
 	public void fileDisplay() throws NullPointerException {
 		String[] files;
-		File dir1 = new File("C:\\JavaPgm\\src\\phase1project\\Files");
+		
+		File dir1 = new File("C:\\FSD-Java-Phase1\\Project_phase_01\\FileManagementSystem\\FileHandling\\src\\LockedMe\\com\\Files\\");
 		files = dir1.list();
 		// Check the directory is empty or not
 		if (files.length == 0) {
@@ -165,8 +167,9 @@ public class MainMenu {
 			}
 			Collections.sort(strList);
 			//print the files inside the string array list in ascending order
+			System.out.println("\tFiiles in the sorted order");
 	        for(String string: strList) 
-	        	System.out.println("\tFiiles in the sorted order "+string);
+	        	System.out.println("\t"+string);
 	   }
 	}
 	
@@ -176,7 +179,8 @@ public class MainMenu {
 		sc.nextLine();
 		String fileName = sc.nextLine().toLowerCase().trim();
 		// to add the file inside the folder
-		String path = "C:\\JavaPgm\\src\\phase1project\\Files";
+		
+		String path = "C:\\FSD-Java-Phase1\\Project_phase_01\\FileManagementSystem\\FileHandling\\src\\LockedMe\\com\\Files";
 		File fileNew = new File(path+"\\"+fileName);
 		System.out.println("\tInside the path\t"+fileNew);
 		if(fileNew.createNewFile()) {
@@ -189,14 +193,14 @@ public class MainMenu {
 	
 	//Search a file
 	public void searchFile() throws FileNotFoundException, NullPointerException{
-		fileDisplay();
 		int flag = 0;
-		String path = "C:\\JavaPgm\\src\\phase1project\\Files";
+		
+		String path ="C:\\FSD-Java-Phase1\\Project_phase_01\\FileManagementSystem\\FileHandling\\src\\LockedMe\\com\\Files";
 		String[] fileList;
 		File dir = new File(path);
 		System.out.println("\n\tPlease Enter the file name you want to search in this folder eg:File1");
 		sc.nextLine();
-		String file = sc.nextLine().trim();
+		String file = sc.nextLine().toLowerCase().trim();
 		fileList = dir.list();
 		// Display File found in the list
 		for(int i = 0; i < fileList.length; i++) {
@@ -217,22 +221,23 @@ public class MainMenu {
 		}
 	}
 	
-	//Permenantly delete a file
+	//Permanently delete a file
 	public void delete() throws FileSystemException, NoSuchFileException, IOException, NullPointerException, DirectoryNotEmptyException {
+		fileDisplay();
 		sc.nextLine();
-		String path = "C:\\JavaPgm\\src\\phase1project\\Files\\";
-	//	File dir = new File(path);
-	   System.out.println("\tPlease enter the file to delete");
-		String filePath = path +sc.nextLine();
-		//System.out.println("\t"+filePath);
+		
+		String path = "C:\\FSD-Java-Phase1\\Project_phase_01\\FileManagementSystem\\FileHandling\\src\\LockedMe\\com\\Files\\";
+	    // delete file inside specified path   
+	    System.out.println("\tPlease enter the file to delete");
+		String filePath = path +sc.nextLine().toLowerCase().trim();
+		
 		Path path1 = Paths.get(filePath);
 		System.out.println("\tFile Path -"+path1);
 		Files.delete(path1);
 		System.out.println("\n\tFile Deleted!");
 	}
-}		
 
-
+}
 
 
 
