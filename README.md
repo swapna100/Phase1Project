@@ -17,7 +17,7 @@ Technology used:	Java Technology version SE 8. To develop codes and to run the p
 	Git bash: To create a local repository to add and push documents, files, and codes into the remote repository.
 
 	GitHub	: To create a repository that could store all files related to the project.
-Repository Link:                            …………………………………………………..
+Repository Link:                         https://github.com/swapna100/Phase1Project
 
 Product capabilities:                       Manage the File Handling process inside the specified folder.
 
